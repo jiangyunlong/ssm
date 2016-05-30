@@ -3,6 +3,7 @@ package com.jyl.security.userdetails;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,14 +18,15 @@ public class MyUserDetailsService implements UserDetailsService{
 	
 	@Autowired
 	private UserService userService;
+	
+	Logger log = Logger.getLogger(MyUserDetailsService.class);
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.out.println("--------------"+username);
 		User user = userService.getUserByUsername(username);
 		if(user == null){
-			System.out.println("username["+username+"] is not exists.");
+			log.debug("username["+username+"] is not exists.");
 			return null;
 		}
 		
