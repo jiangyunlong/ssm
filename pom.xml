@@ -12,11 +12,21 @@
 
   	<properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<javax.servlet.version>3.0.1</javax.servlet.version>
     	<spring.version>4.1.4.RELEASE</spring.version>
+    	<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
 		<mybatis.version>3.2.8</mybatis.version>
   	</properties>
 
   	<dependencies>
+  	
+  		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
     	<dependency>
       		<groupId>junit</groupId>
       		<artifactId>junit</artifactId>
@@ -62,26 +72,41 @@
 		  <version>${mybatis.version}</version>
 		</dependency>
 		
-		<!--mybatis spring 插件 -->  
         <dependency>  
             <groupId>org.mybatis</groupId>  
             <artifactId>mybatis-spring</artifactId>  
             <version>1.2.2</version>  
         </dependency>  
 		
-		<!-- mysql连接 -->  
         <dependency>  
             <groupId>mysql</groupId>  
             <artifactId>mysql-connector-java</artifactId>  
             <version>5.1.34</version>  
         </dependency>
   
-        <!-- 数据源 -->  
         <dependency>  
             <groupId>com.alibaba</groupId>  
             <artifactId>druid</artifactId>  
             <version>1.0.12</version>  
-        </dependency>  
+        </dependency>
+        
+        <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.7.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+		 	<artifactId>spring-security-web</artifactId>
+		 	<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+		 	<groupId>org.springframework.security</groupId>
+		 	<artifactId>spring-security-config</artifactId>
+		 	<version>${org.springframework.security.version}</version>
+		</dependency>
+        
   	</dependencies>
   	
   	<build>
