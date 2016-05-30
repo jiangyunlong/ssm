@@ -14,6 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.jyl.ssm.model.User;
 import com.jyl.ssm.service.UserService;
 
+/**
+ * 
+ * @author Long, E-mail:jyl0401@163.com
+ * @date 2016年5月30日 下午2:43:53
+ */
 public class MyUserDetailsService implements UserDetailsService{
 	
 	@Autowired

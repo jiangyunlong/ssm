@@ -7,6 +7,11 @@ import com.jyl.ssm.dao.UserMapper;
 import com.jyl.ssm.model.User;
 import com.jyl.ssm.service.UserService;
 
+/**
+ * 
+ * @author Long, E-mail:jyl0401@163.com
+ * @date 2016年5月30日 下午2:43:53
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

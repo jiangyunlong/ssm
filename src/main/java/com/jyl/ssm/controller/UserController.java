@@ -1,19 +1,30 @@
 package com.jyl.ssm.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jyl.ssm.model.User;
 import com.jyl.ssm.service.UserService;
+import com.jyl.util.servlet.HttpServletUtil;
 
+/**
+ * 
+ * @author Long, E-mail:jyl0401@163.com
+ * @date 2016年5月30日 下午2:43:53
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	Logger log = Logger.getLogger(UserController.class);
 
 	@Autowired
 	private UserService userService;
@@ -37,10 +48,11 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value="/{userId}",method = RequestMethod.GET,produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public User findOne(ModelMap modelMap, @PathVariable int userId){
-		return userService.getUserById(userId);
+	@RequestMapping("/{userId}")
+	public void findOne(HttpServletResponse response, ModelMap modelMap, @PathVariable int userId) throws IOException {
+		
+		User user = userService.getUserById(userId);
+		HttpServletUtil.writeObjectJSON2Response(response, user);
 	}
 	
 	/*@RequestMapping("/showInfos")

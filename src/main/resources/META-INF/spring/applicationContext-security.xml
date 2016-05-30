@@ -7,6 +7,7 @@
           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<s:http pattern="/login.jsp*" security="none"/>
+	<s:http pattern="/user/**" security="none"/>
 	
 	<s:http use-expressions="false">
 		<s:intercept-url pattern="/**" access="ROLE_USER" />
@@ -18,13 +19,6 @@
 	</s:http>
 
 	<s:authentication-manager>
-		<!-- <s:authentication-provider>
-			<s:password-encoder hash="md5" />
- 			<s:user-service>
- 				<s:user name="jimi" password="202cb962ac59075b964b07152d234b70" authorities="ROLE_USER, ROLE_ADMIN" />
- 				<s:user name="bob" password="202cb962ac59075b964b07152d234b70" authorities="ROLE_USER" />
- 			</s:user-service>
-		</s:authentication-provider> -->
 		<s:authentication-provider user-service-ref="userDetailsService"></s:authentication-provider>
 	</s:authentication-manager>
 	
