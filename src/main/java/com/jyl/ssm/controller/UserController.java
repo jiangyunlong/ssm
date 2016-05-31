@@ -1,6 +1,7 @@
 package com.jyl.ssm.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jyl.ssm.model.User;
 import com.jyl.ssm.service.UserService;
@@ -36,7 +38,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/showInfo/{userId}")
-	public String showInfo(ModelMap modelMap, @PathVariable int userId){
+	public String showInfo(ModelMap modelMap, @PathVariable Integer userId){
 		User user = userService.getUserById(userId);
 		modelMap.addAttribute("user", user);
 		return "/user/showInfo";
@@ -49,15 +51,41 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/{userId}")
-	public void findOne(HttpServletResponse response, ModelMap modelMap, @PathVariable int userId) throws IOException {
+	public void findOne(HttpServletResponse response, ModelMap modelMap, @PathVariable Integer userId) throws IOException {
 		
 		User user = userService.getUserById(userId);
 		HttpServletUtil.writeObjectJSON2Response(response, user);
 	}
 	
-	/*@RequestMapping("/showInfos")
-	public @ResponseBody Object showUserInfos(){
-		List<User> userInfos = userService.getUsers();
-		return userInfos;
-	}*/
+	@RequestMapping("/list")
+	public void findAll(HttpServletResponse response, ModelMap modelMap) throws IOException {
+		
+		List<User> list = userService.getUserList();
+		HttpServletUtil.writeObjectJSON2Response(response, list);
+	}
+	
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public void createOne (HttpServletResponse response, ModelMap modelMap, User user) throws IOException {
+		
+		if(user == null){
+			log.error("param user cannot be null.");
+			return;
+		}
+		
+		userService.insertOne(user);
+	}
+	
+	@RequestMapping(value="/edit/{userId}", method=RequestMethod.POST)
+	public void editOne (HttpServletResponse response, ModelMap modelMap, 
+			@PathVariable Integer userId, User user) throws IOException {
+		
+		if(userId == null || user == null){
+			log.error("param userId or user cannot be null.");
+			return;
+		}
+		
+		user.setId(userId);
+		userService.editOne(user);
+	}
+	
 }
