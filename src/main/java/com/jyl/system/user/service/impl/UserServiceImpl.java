@@ -1,4 +1,4 @@
-package com.jyl.ssm.service.impl;
+package com.jyl.system.user.service.impl;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import com.jyl.ssm.dao.UserMapper;
-import com.jyl.ssm.model.User;
-import com.jyl.ssm.service.UserService;
+import com.jyl.system.user.dao.UserMapper;
+import com.jyl.system.user.model.User;
+import com.jyl.system.user.service.UserService;
 
 /**
  * 

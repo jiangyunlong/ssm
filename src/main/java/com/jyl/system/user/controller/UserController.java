@@ -1,4 +1,4 @@
-package com.jyl.ssm.controller;
+package com.jyl.system.user.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jyl.ssm.model.User;
-import com.jyl.ssm.service.UserService;
+import com.jyl.system.user.model.User;
+import com.jyl.system.user.service.UserService;
 import com.jyl.util.servlet.HttpServletUtil;
 
 /**
@@ -27,7 +27,7 @@ import com.jyl.util.servlet.HttpServletUtil;
 public class UserController {
 	
 	Logger log = Logger.getLogger(UserController.class);
-
+	
 	@Autowired
 	private UserService userService;
 	

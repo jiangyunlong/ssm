@@ -1,8 +1,8 @@
-package com.jyl.ssm.dao;
+package com.jyl.system.user.dao;
 
 import java.util.List;
 
-import com.jyl.ssm.model.User;
+import com.jyl.system.user.model.User;
 
 public interface UserMapper {
 	

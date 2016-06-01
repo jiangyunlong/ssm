@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.jyl.ssm.model.User;
-import com.jyl.ssm.service.UserService;
+import com.jyl.system.user.model.User;
+import com.jyl.system.user.service.UserService;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService{
 			log.debug("username["+username+"] is not exists.");
 			return null;
 		}
-		
+		log.debug("username["+user.getUsername()+"].");
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		list.add(new SimpleGrantedAuthority("ROLE_USER"));
 		

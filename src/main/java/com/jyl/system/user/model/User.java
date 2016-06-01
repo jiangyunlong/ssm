@@ -1,4 +1,4 @@
-package com.jyl.ssm.model;
+package com.jyl.system.user.model;
 
 public class User {
     private Integer id;

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 Juno Inc., All Rights Reserved.
  */
-package com.jyl.ssm.model;
+package com.jyl.system.user.model;
 
 import java.util.List;
 
