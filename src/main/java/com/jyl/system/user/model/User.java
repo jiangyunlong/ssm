@@ -1,7 +1,8 @@
 package com.jyl.system.user.model;
 
 public class User {
-    private Integer id;
+	
+    private Long id;
 
     private String username;
 
@@ -9,11 +10,11 @@ public class User {
 
     private Integer age;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

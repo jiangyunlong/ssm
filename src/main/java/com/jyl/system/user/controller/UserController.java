@@ -38,7 +38,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/showInfo/{userId}")
-	public String showInfo(ModelMap modelMap, @PathVariable Integer userId){
+	public String showInfo(ModelMap modelMap, @PathVariable Long userId){
 		User user = userService.getUserById(userId);
 		modelMap.addAttribute("user", user);
 		return "/user/showInfo";
@@ -51,7 +51,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/{userId}")
-	public void findOne(HttpServletResponse response, ModelMap modelMap, @PathVariable Integer userId) throws IOException {
+	public void findOne(HttpServletResponse response, ModelMap modelMap, @PathVariable Long userId) throws IOException {
 		
 		User user = userService.getUserById(userId);
 		HttpServletUtil.writeObjectJSON2Response(response, user);
@@ -77,7 +77,7 @@ public class UserController {
 	
 	@RequestMapping(value="/edit/{userId}", method=RequestMethod.POST)
 	public void editOne (HttpServletResponse response, ModelMap modelMap, 
-			@PathVariable Integer userId, User user) throws IOException {
+			@PathVariable Long userId, User user) throws IOException {
 		
 		if(userId == null || user == null){
 			log.error("param userId or user cannot be null.");

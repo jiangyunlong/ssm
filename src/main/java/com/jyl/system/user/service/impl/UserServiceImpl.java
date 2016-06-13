@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public User getUserById(int id) {
+	public User getUserById(Long id) {
 		
 		return userMapper.selectByPrimaryKey(id);
 	}
@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService {
 			return;
 		}
 		
-		if(user.getAge() != null && user.getAge()>0){
-			log.error("param age cannot be null or zero.");
+		if(user.getAge() == null || user.getAge()<=0){
+			log.error("param age cannot be null or <=0.");
 			return;
 		}
 		

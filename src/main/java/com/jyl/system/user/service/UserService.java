@@ -11,7 +11,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	User getUserById(int id);
+	User getUserById(Long id);
 	
 	/**
 	 * 根据用户名查询用户信息

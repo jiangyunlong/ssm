@@ -6,13 +6,13 @@ import com.jyl.system.user.model.User;
 
 public interface UserMapper {
 	
-	User selectByPrimaryKey(Integer id);
+	User selectByPrimaryKey(Long id);
     
     User selectByUsername(String username);
     
     List<User> selectAllUser();
 	
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(User record);
 
