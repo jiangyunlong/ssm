@@ -10,6 +10,9 @@
 	<s:http pattern="/upload.jsp*" security="none"/>
 	<s:http pattern="/user/**" security="none"/>
 	<s:http pattern="/file/**" security="none"/>
+	<s:http pattern="/admin/**" security="none"/>
+	<s:http pattern="/bootstrap/**" security="none"/>
+	<s:http pattern="/jquery/**" security="none"/>
 	
 	<s:http use-expressions="false">
 		<s:intercept-url pattern="/**" access="ROLE_USER" />
