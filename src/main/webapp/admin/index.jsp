@@ -30,17 +30,13 @@
 				            <li><a href="#">见红</a></li>
 		          		</ul>
 		        	</li>
-		        	<li><a href="../logout.action">退出</a></li>
+		      	</ul>
+		      	<ul class="nav navbar-nav navbar-right">
+		      		<li><a href="../logout.action">退出</a></li>
 		      	</ul>
 		 	</div>
 		</div>
 	</nav>
   
-  <!-- 
-  
-  
-  
-	<div align="right"><a href="../logout.action">退出</a></div>
-	<div>Hello world!</div> -->
 </body>
 </html>
