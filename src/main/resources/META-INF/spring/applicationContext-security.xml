@@ -6,20 +6,16 @@
           http://www.springframework.org/schema/security
           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<s:http pattern="/login.jsp*" security="none"/>
-	<s:http pattern="/upload.jsp*" security="none"/>
-	<s:http pattern="/user/**" security="none"/>
-	<s:http pattern="/file/**" security="none"/>
-	<s:http pattern="/admin/**" security="none"/>
-	<s:http pattern="/bootstrap/**" security="none"/>
-	<s:http pattern="/jquery/**" security="none"/>
+	<s:http pattern="/admin/login.jsp*" security="none"/>
+	<s:http pattern="/admin/css/**" security="none"/>
+	<s:http pattern="/admin/js/**" security="none"/>
 	
 	<s:http use-expressions="false">
-		<s:intercept-url pattern="/**" access="ROLE_USER" />
-		<s:form-login login-page="/login.jsp" default-target-url="/index.jsp" 
-			always-use-default-target="true" login-processing-url="/login.action"
+		<s:intercept-url pattern="/admin/**" access="ROLE_USER" />
+		<s:form-login login-page="/admin/login.jsp" default-target-url="/admin/index.jsp" 
+			always-use-default-target="true" login-processing-url="/admin/login.action"
 			username-parameter="username" password-parameter="password" />
-		<s:logout logout-url="/logout.action" delete-cookies="JSESSIONID" />
+		<s:logout logout-url="/admin/logout.action" delete-cookies="JSESSIONID" logout-success-url="/admin/login.jsp" />
 		<s:session-management invalid-session-url="/invalidSession.jsp" />
 	</s:http>
 
