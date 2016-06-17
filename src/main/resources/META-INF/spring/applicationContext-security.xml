@@ -9,6 +9,7 @@
 	<s:http pattern="/admin/login.jsp*" security="none"/>
 	<s:http pattern="/admin/css/**" security="none"/>
 	<s:http pattern="/admin/js/**" security="none"/>
+	<s:http pattern="/admin/images/**" security="none"/>
 	
 	<s:http use-expressions="false">
 		<s:intercept-url pattern="/admin/**" access="ROLE_USER" />
@@ -16,7 +17,7 @@
 			always-use-default-target="true" login-processing-url="/admin/login.action"
 			username-parameter="username" password-parameter="password" />
 		<s:logout logout-url="/admin/logout.action" delete-cookies="JSESSIONID" logout-success-url="/admin/login.jsp" />
-		<s:session-management invalid-session-url="/invalidSession.jsp" />
+		<s:session-management invalid-session-url="/admin/login.jsp" />
 	</s:http>
 
 	<s:authentication-manager>
