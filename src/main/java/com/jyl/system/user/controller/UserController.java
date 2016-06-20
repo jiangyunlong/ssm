@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jyl.common.Result;
+import com.jyl.security.SecurityUtils;
 import com.jyl.system.user.model.User;
 import com.jyl.system.user.service.UserService;
+import com.jyl.util.ParamChecker;
 import com.jyl.util.servlet.HttpServletUtil;
 
 /**
@@ -86,6 +89,19 @@ public class UserController {
 		
 		user.setId(userId);
 		userService.editOne(user);
+	}
+	
+	@RequestMapping(value="/pwdModify", method=RequestMethod.POST)
+	public void editOne (HttpServletResponse response, ModelMap modelMap, 
+			String oldPassword, String newPassword, String confirmPassword) throws IOException {
+		
+		Result result = new Result();
+		ParamChecker.checkEmpty(oldPassword, "oldPassword");
+		ParamChecker.checkEmpty(newPassword, "newPassword");
+		ParamChecker.checkEmpty(confirmPassword, "confirmPassword");
+		
+		result = userService.pwdModify(SecurityUtils.getCurrentUserId(), oldPassword, newPassword, confirmPassword);
+		HttpServletUtil.writeObjectJSON2Response(response, result);
 	}
 	
 }

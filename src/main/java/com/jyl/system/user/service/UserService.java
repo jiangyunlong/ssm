@@ -2,6 +2,7 @@ package com.jyl.system.user.service;
 
 import java.util.List;
 
+import com.jyl.common.Result;
 import com.jyl.system.user.model.User;
 
 public interface UserService {
@@ -38,4 +39,13 @@ public interface UserService {
 	 * @param user
 	 */
 	void editOne(User user);
+	
+	/**
+	 * 密码修改
+	 * @param userId
+	 * @param oldPassword
+	 * @param newPassword
+	 * @param confirmPassword
+	 */
+	Result pwdModify(Long userId, String oldPassword, String newPassword, String confirmPassword);
 }

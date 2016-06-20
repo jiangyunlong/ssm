@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import com.jyl.common.Result;
 import com.jyl.system.user.dao.UserMapper;
 import com.jyl.system.user.model.User;
 import com.jyl.system.user.service.UserService;
@@ -71,6 +72,37 @@ public class UserServiceImpl implements UserService {
 		
 		Assert.notNull(user, "param userId cannot be null");
 		userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public Result pwdModify(Long userId, String oldPassword, String newPassword, String confirmPassword) {
+		
+		Result result = new Result();
+		if(!newPassword.equals(confirmPassword)){
+			log.error("oldPassword and confirmPassword can not match.");
+			result.setCode(1001);
+			result.setMsg("新密码与旧密码不可以一样");
+			return result;
+		}
+		
+		User user = userMapper.selectByPrimaryKey(userId);
+		if(user == null){
+			log.error("user[userId="+userId+"] not found.");
+			result.setCode(1002);
+			result.setMsg("非法请求：当前用户不存在");
+			return result;
+		}
+		
+		if(!oldPassword.equals(user.getPassword())){
+			log.error("oldPassword error.");
+			result.setCode(1003);
+			result.setMsg("旧密码不正确");
+			return result;
+		}
+		
+		user.setPassword(newPassword);
+		userMapper.modifyPassword(user);
+		return result;
 	}
 
 }
