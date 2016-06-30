@@ -18,13 +18,21 @@
 			username-parameter="username" password-parameter="password" />
 		<s:logout logout-url="/admin/logout.action" delete-cookies="JSESSIONID" logout-success-url="/admin/login.jsp" />
 		<s:session-management invalid-session-url="/admin/login.jsp" />
+		<s:remember-me services-ref="rememberMeServices" />
 	</s:http>
 
-	<s:authentication-manager>
+	<s:authentication-manager erase-credentials="false">
 		<s:authentication-provider user-service-ref="userDetailsService">
 		<s:password-encoder hash="md5"></s:password-encoder>
 		</s:authentication-provider>
 	</s:authentication-manager>
+	
+	<bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+      	<property name="userDetailsService" ref="userDetailsService" />
+      	<property name="key" value="ssm" />
+      	<property name="parameter" value="rememberMe"/>
+      	<property name="tokenValiditySeconds" value="1209600"/>
+   </bean>
 	
 	<bean id="userDetailsService" class="com.jyl.security.userdetails.MyUserDetailsService">
 	</bean>
