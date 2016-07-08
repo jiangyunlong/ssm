@@ -11,29 +11,40 @@
 	<s:http pattern="/admin/js/**" security="none"/>
 	<s:http pattern="/admin/images/**" security="none"/>
 	
-	<s:http use-expressions="false">
+	<s:http>
 		<s:intercept-url pattern="/admin/**" access="ROLE_USER" />
 		<s:form-login login-page="/admin/login.jsp" default-target-url="/admin/index.jsp" 
 			always-use-default-target="true" login-processing-url="/admin/login.action"
 			username-parameter="username" password-parameter="password" />
-		<s:logout logout-url="/admin/logout.action" delete-cookies="JSESSIONID" logout-success-url="/admin/login.jsp" />
+		<s:logout logout-url="/admin/logout.action" logout-success-url="/admin/login.jsp" />
 		<s:session-management invalid-session-url="/admin/login.jsp" />
-		<s:remember-me services-ref="rememberMeServices" />
+		<s:remember-me key="ssmKey" services-ref="rememberMeServices" />
 	</s:http>
 
 	<s:authentication-manager erase-credentials="false">
 		<s:authentication-provider user-service-ref="userDetailsService">
-		<s:password-encoder hash="md5"></s:password-encoder>
+			<s:password-encoder hash="md5"></s:password-encoder>
 		</s:authentication-provider>
 	</s:authentication-manager>
 	
 	<bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
       	<property name="userDetailsService" ref="userDetailsService" />
-      	<property name="key" value="ssm" />
+      	<property name="key" value="ssmKey" />
       	<property name="parameter" value="rememberMe"/>
-      	<property name="tokenValiditySeconds" value="1209600"/>
-   </bean>
-	
+      	<property name="cookieName" value="SSM_REMEMBER_ME_COOKIE"/>
+   	</bean>
+   	
+   	<!-- <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+   		<property name="userDetailsService" ref="userDetailsService" />
+      	<property name="key" value="ssmKey" />
+      	<property name="parameter" value="rememberMe"/>
+      	<property name="cookieName" value="SSM_REMEMBER_ME_COOKIE"/>
+      	<property name="tokenRepository" ref="tokenRepository"/>
+   	</bean>
+   	<bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+   	
 	<bean id="userDetailsService" class="com.jyl.security.userdetails.MyUserDetailsService">
 	</bean>
 
