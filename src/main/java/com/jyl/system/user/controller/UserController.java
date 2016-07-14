@@ -26,7 +26,7 @@ import com.jyl.util.servlet.HttpServletUtil;
  * @date 2016年5月30日 下午2:43:53
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class UserController {
 	
 	Logger log = Logger.getLogger(UserController.class);

@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>后台管理系统</title>
-<link href="<%=ctxPath %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=ctxPath %>/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="<%=ctxPath %>/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 <script src="<%=ctxPath %>/jquery/jquery-1.10.1.min.js"></script>
 <script src="<%=ctxPath %>/bootstrap/js/bootstrap.min.js"></script>

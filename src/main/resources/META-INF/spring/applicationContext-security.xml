@@ -11,21 +11,35 @@
 	<s:http pattern="/admin/js/**" security="none"/>
 	<s:http pattern="/admin/images/**" security="none"/>
 	
-	<s:http>
-		<s:intercept-url pattern="/admin/**" access="ROLE_USER" />
-		<s:form-login login-page="/admin/login.jsp" default-target-url="/admin/index.jsp" 
-			always-use-default-target="true" login-processing-url="/admin/login.action"
-			username-parameter="username" password-parameter="password" />
+	<s:http use-expressions="true" entry-point-ref="authenticationEntryPoint">
+		<s:intercept-url pattern="/admin/**" access="hasRole('ROLE_USER')"/>
 		<s:logout logout-url="/admin/logout.action" logout-success-url="/admin/login.jsp" />
+		<s:custom-filter position="FORM_LOGIN_FILTER" ref="loginFilter"/>
 		<s:session-management invalid-session-url="/admin/login.jsp" />
-		<s:remember-me key="ssmKey" services-ref="rememberMeServices" />
 	</s:http>
 
-	<s:authentication-manager erase-credentials="false">
-		<s:authentication-provider user-service-ref="userDetailsService">
-			<s:password-encoder hash="md5"></s:password-encoder>
-		</s:authentication-provider>
-	</s:authentication-manager>
+	<bean id="loginFilter" class="com.jyl.security.filter.ValidateCodeAuthenticationFilter">  
+	    <property name="authenticationManager" ref="authenticationManager" />  
+	   	<property name="authenticationFailureHandler" ref="failureHandler"/>  
+        <property name="authenticationSuccessHandler" ref="successHandler"/>  
+	    <property name="rememberMeServices" ref="rememberMeServices"/>
+	    <property name="validateCodeParameter" value="validateCode" />
+	    <property name="validateCodeSwitch" value="false" />
+	    <property name="filterProcessesUrl" value="/admin/login.action" />
+	    <property name="usernameParameter" value="username" />
+	    <property name="passwordParameter" value="password" />
+	</bean>  
+	
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
+	    <property name="loginFormUrl" value="/admin/login.jsp" />  
+	</bean>  
+	
+	<bean id="successHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">  
+        <property name="defaultTargetUrl" value="/admin/"/>
+    </bean>  
+    <bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">  
+        <property name="defaultFailureUrl" value="/admin/login.jsp?login_error"/>
+    </bean>  
 	
 	<bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
       	<property name="userDetailsService" ref="userDetailsService" />
@@ -33,6 +47,19 @@
       	<property name="parameter" value="rememberMe"/>
       	<property name="cookieName" value="SSM_REMEMBER_ME_COOKIE"/>
    	</bean>
+   	
+   	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider ref="authenticationProvider" />
+	</s:authentication-manager>
+  	
+	<bean id="authenticationProvider"  
+    	class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">  
+	    <property name="userDetailsService" ref="userDetailsService" />  
+	    <property name="hideUserNotFoundExceptions" value="false" />  
+	    <property name="passwordEncoder" ref="passwordEncoder"/>  
+	</bean>  
+	
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
    	
    	<!-- <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
    		<property name="userDetailsService" ref="userDetailsService" />
