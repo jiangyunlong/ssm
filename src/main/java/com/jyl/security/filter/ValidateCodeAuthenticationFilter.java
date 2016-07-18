@@ -42,7 +42,7 @@ public class ValidateCodeAuthenticationFilter extends UsernamePasswordAuthentica
 	        randomCode = randomCode.trim();
 	        
 	        if(false == RandomCodeUtils.checkRandomCode(request, randomCode)){
-	        	throw new ValidateCodeAuthenticationException("validate code cannot match.");
+	        	throw new ValidateCodeAuthenticationException("验证码不正确");
 	        }
 		}
 

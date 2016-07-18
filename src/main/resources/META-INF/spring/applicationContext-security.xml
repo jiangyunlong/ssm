@@ -56,11 +56,16 @@
     	class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">  
 	    <property name="userDetailsService" ref="userDetailsService" />  
 	    <property name="hideUserNotFoundExceptions" value="false" />  
-	    <property name="passwordEncoder" ref="passwordEncoder"/>  
+	    <property name="passwordEncoder" ref="passwordEncoder"/>
+	    <property name="messageSource" ref="messageSource"/>
 	</bean>  
 	
 	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
    	
+   	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<!-- <property name="basename" value="classpath:org/springframework/security/messages_zh_CN"/> -->
+    	<property name="basename" value="classpath:messageBundle/springSecurity-messages"/>
+    </bean>
    	<!-- <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
    		<property name="userDetailsService" ref="userDetailsService" />
       	<property name="key" value="ssmKey" />

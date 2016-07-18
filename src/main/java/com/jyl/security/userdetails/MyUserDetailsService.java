@@ -32,7 +32,8 @@ public class MyUserDetailsService implements UserDetailsService{
 		User user = userService.getUserByUsername(username);
 		if(user == null){
 			log.debug("username["+username+"] is not exists.");
-			return null;
+			throw new UsernameNotFoundException("用户名不存在");
+			//return null;
 		}
 		log.debug("username["+user.getUsername()+"].");
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();

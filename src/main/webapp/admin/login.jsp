@@ -31,6 +31,9 @@ $(function(){
             	<input type="checkbox" name="rememberMe" value="on"> 记住我
           	</label>
         </div>
+        <div style="color:#F00;padding:5px;margin:10px"> 
+	    ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message} 
+	    </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>
     </div>
