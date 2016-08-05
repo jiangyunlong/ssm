@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.jyl.util.httpClient.HttpClientGetRequest;
+import com.jyl.util.httpClient.HttpClientUtil;
 import com.jyl.util.json.JsonUtil;
 import com.jyl.util.redis.JedisService;
 import com.jyl.wechat.WechatConst;
@@ -46,7 +46,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
 		String accessToken = "";
 		String url = MessageFormat.format(baseUrl, appId, appSecret);
-		String responseStr = HttpClientGetRequest.executeGet(url);
+		String responseStr = HttpClientUtil.get(url);
 		Jedis jedis = redisService.borrow();
 		
 		try {
