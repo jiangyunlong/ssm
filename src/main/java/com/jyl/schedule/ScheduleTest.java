@@ -3,7 +3,6 @@
  */
 package com.jyl.schedule;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleTest {
 
-    @Scheduled(cron="${schedule.test}")
+    //@Scheduled(cron="${schedule.test}")
     public void exejob() {
         System.out.println(System.currentTimeMillis()+"-------do work!");
     }
