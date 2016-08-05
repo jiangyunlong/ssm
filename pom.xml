@@ -16,6 +16,7 @@
     	<spring.version>4.1.4.RELEASE</spring.version>
     	<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
 		<mybatis.version>3.2.8</mybatis.version>
+		<httpclient.version>4.5</httpclient.version>
   	</properties>
 
   	<dependencies>
@@ -138,6 +139,20 @@
 		    <version>2.8.1</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+		<dependency>
+		    <groupId>dom4j</groupId>
+		    <artifactId>dom4j</artifactId>
+		    <version>1.6.1</version>
+		</dependency>
+		
+		
   	</dependencies>
   	
   	<build>
@@ -161,7 +176,7 @@
 					<server>tomcat7</server>
 					<url>http://localhost:8080/manager</url>
 					<path>/</path>
-					<port>8037</port>
+					<port>80</port>
 		        </configuration>
 	        </plugin>
 		</plugins>
