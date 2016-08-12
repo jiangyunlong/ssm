@@ -13,6 +13,7 @@ ssm，即Spring+SpringMVC+MyBatis，也是本平台的核心框架组成，搭�
 - 定时任务：基于spring schedule，支持定时任务配置；
 - 项目构建：maven构建项目，mybatis generator生成mybatis映射文件和Model；
 - 工具类：常用日期时间处理、通用异常处理机制、Jackson进行json数据处理、redis缓存、参数检查、加密、线程池等；
+- 前端：前端采用bootstrap+jQuery框架；
 
 ### 项目配置说明
 - 项目配置：config.properties，主要包含数据库配置、文件上传目录配置和redis服务器配置等；
