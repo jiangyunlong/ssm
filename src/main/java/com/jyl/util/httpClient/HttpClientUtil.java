@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -22,6 +23,8 @@ import org.apache.http.util.EntityUtils;
  * @date 2016年8月3日 上午10:42:11
  */
 public class HttpClientUtil {
+	
+	private static final Logger log = Logger.getLogger(HttpClientUtil.class);
 
 	/**
 	 * post request
@@ -47,16 +50,20 @@ public class HttpClientUtil {
 					response = responseContent;
 				}
 			} finally {
+				log.info("finally close the httpClient");
 				httpResponse.close();
 			}
 		} catch (Exception e) {
+			log.error("Exception", e);
 			e.printStackTrace();
 		} finally {
+			log.info("finally close the httpClient");
 			try {
 				if (httpClient != null) {
 					httpClient.close();
 				}
 			} catch (IOException e) {
+				log.error("IOException", e);
 				e.printStackTrace();
 			}
 		}
@@ -83,16 +90,20 @@ public class HttpClientUtil {
 					response = responseContent;
 				}
 			} finally {
+				log.info("finally close the httpClient");
 				httpResponse.close();
 			}
 		} catch (Exception e) {
+			log.error("IOException", e);
 			e.printStackTrace();
 		} finally {
+			log.info("finally close the httpClient");
 			try {
 				if (httpClient != null) {
 					httpClient.close();
 				}
 			} catch (IOException e) {
+				log.error("IOException", e);
 				e.printStackTrace();
 			}
 		}

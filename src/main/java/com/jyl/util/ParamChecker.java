@@ -94,12 +94,12 @@ public class ParamChecker {
      * @param paramName 集合名称.
      * @throws IllegalArgumentException 如果collection为空.
      */
-    public static void checkContainsNull(Collection<?> collection, String paramName) {
+    /*public static void checkContainsNull(Collection<?> collection, String paramName) {
         checkNull(collection, paramName);
         if (collection.contains(null)) {
             throw new IllegalArgumentException("Collection with name " + paramName + " can not contain null");
         }
-    }
+    }*/
 
     /**
      * 检查weekday是否在正常的星期范围内,即[1,7].

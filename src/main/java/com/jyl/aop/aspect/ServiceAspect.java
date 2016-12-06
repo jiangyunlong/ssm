@@ -62,10 +62,12 @@ public class ServiceAspect {
 				log.info("around " + joinPoint + "\tUse time : " + (end - start) + " ms!");
 			}
 		} catch (Throwable e) {
+			log.info("Throwable", e);
 			long end = System.currentTimeMillis();
 			if(log.isInfoEnabled()){
 				log.info("around " + joinPoint + "\tUse time : " + (end - start) + " ms with exception : " + e.getMessage());
 			}
+			e.printStackTrace();
 		}
 	}
 	

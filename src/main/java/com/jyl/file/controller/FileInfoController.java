@@ -80,6 +80,7 @@ public class FileInfoController {
 		try {
 			fileName = new String(fileName.getBytes(), "ISO-8859-1");
 		} catch (UnsupportedEncodingException e) {
+			log.error("UnsupportedEncodingException", e);
 			e.printStackTrace();
 		}
 
@@ -120,6 +121,7 @@ public class FileInfoController {
 		try {
 			fileName = new String(fileName.getBytes(), "ISO-8859-1");
 		} catch (UnsupportedEncodingException e) {
+			log.error("UnsupportedEncodingException", e);
 			e.printStackTrace();
 		}
 

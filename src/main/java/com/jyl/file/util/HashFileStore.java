@@ -12,6 +12,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
@@ -27,6 +28,8 @@ import org.springframework.util.Assert;
 public class HashFileStore implements FileStore, InitializingBean {
 	
 	private String baseDirectory;
+	
+	private Logger log = Logger.getLogger(HashFileStore.class);
 
 	/**
 	 * UID used in unique file name generation.
@@ -61,12 +64,14 @@ public class HashFileStore implements FileStore, InitializingBean {
 			FInfo f = this.createFile(name, is);
 			result = f.getPath();
 		} catch (FileNotFoundException e) {
+			log.error("FileNotFoundException", e);
 			e.printStackTrace();
 		} finally {
 			if (is != null)
 				try {
 					is.close();
 				} catch (IOException e) {
+					log.error("IOException", e);
 					e.printStackTrace();
 				}
 		}
@@ -97,22 +102,24 @@ public class HashFileStore implements FileStore, InitializingBean {
 			result.setPath(hashpath);
 			result.setSize(file.length());
 		} catch (Exception e) {
+			log.error("Exception", e);
 			e.printStackTrace();
 		} finally {
 			if (os != null) {
 				try {
 					os.close();
 				} catch (IOException e) {
+					log.error("IOException", e);
 					// ignore
 				}
 			}
 		}
 		File target = new File(this.getBaseDirectory() + hashpath);
-		if (target.exists())
+		if (target.exists()){
 			file.delete();
-		else
+		}else{
 			file.renameTo(target);
-
+		}
 		return result;
 	}
 
@@ -123,6 +130,7 @@ public class HashFileStore implements FileStore, InitializingBean {
 			try {
 				is = new FileInputStream(file);
 			} catch (FileNotFoundException e) {
+				log.error("FileNotFoundException", e);
 				e.printStackTrace();
 			}
 		}

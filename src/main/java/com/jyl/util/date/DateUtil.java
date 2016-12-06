@@ -23,13 +23,11 @@ import org.apache.log4j.Logger;
 import com.jyl.util.ParamChecker;
 
 /**
- *
+ * 日期工具类
  * @author Long, E-mail:jyl0401@163.com
  * @date 2016年6月7日 上午9:35:37
  */
 public class DateUtil {
-	
-	public static Logger log = Logger.getLogger(DateUtil.class);
 	
 	/**
 	 * 日期时间格式
@@ -43,7 +41,7 @@ public class DateUtil {
     /**
      * 一天为1000 * 60 * 60 * 24毫秒.
      */
-    public static final long DAY_MILLISECOND = 1000 * 60 * 60 * 24;
+    public static final int DAY_MILLISECOND = 1000 * 60 * 60 * 24;
 
     /**
      * 23时.
@@ -65,7 +63,6 @@ public class DateUtil {
      */
     private static final int MILLISECOND_999 = 999;
 
-    
     public static final String YEAR_MONTH = "yyyy-MM";
 
     public static final String DEFAULT_TIME_FORMAT = "yyyyMMddHHmmss";
@@ -83,8 +80,9 @@ public class DateUtil {
     /**
      * 常用格式数组
      */
-    public static String[] patterns = new String[] { DATE_TIME_FORMAT,
-            DATE_FORMAT };
+    private static final String[] patterns = new String[] { DATE_TIME_FORMAT, DATE_FORMAT };
+    
+    private static final Logger log = Logger.getLogger(DateUtil.class);
 
     /**
      * 获取星期一, 星期一作为一周的开始
@@ -97,6 +95,7 @@ public class DateUtil {
         try {
             return DateFormatter.parse(dateStr, "yyyy-MM-dd");
         } catch (ParseException e) {
+        	log.error("ParseException", e);
             new RuntimeException(e);
         }
         return new Date();
@@ -263,6 +262,7 @@ public class DateUtil {
             String dateStr = DateFormatUtils.format(date, "yyyy-MM-dd");
             return DateFormatter.parse(dateStr, "yyyy-MM-dd");
         } catch (ParseException e) {
+        	log.error("ParseException", e);
             new RuntimeException(e);
         }
         return new Date();
@@ -349,7 +349,8 @@ public class DateUtil {
             long curtime = System.currentTimeMillis();
             Date date = new Date(curtime);
             return StringToDate(DateToString(date));
-        } catch (Exception Ex) {
+        } catch (Exception e) {
+        	log.error("Exception", e);
             return null;
         }
     }
@@ -728,7 +729,8 @@ public class DateUtil {
         java.util.Date date1 = null;
         try {
             date1 = df.parse(str);
-        } catch (final Exception Ex) {
+        } catch (final Exception e) {
+        	log.error("Exception", e);
             return null;
         }
         return new Date(date1.getTime());
@@ -750,7 +752,8 @@ public class DateUtil {
             } else {
                 return null;
             }
-        } catch (final Exception Ex) {
+        } catch (final Exception e) {
+        	log.error("Exception", e);
             return null;
         }
     }

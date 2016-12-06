@@ -13,6 +13,7 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
@@ -22,8 +23,12 @@ import com.jyl.file.util.FileStore.FInfo;
 public class FileManagerImpl implements FileManager,InitializingBean {
 	
 	private FileStore store;
+	
 	private long maxSize = 1024*1024;
+	
 	private String workDirectory = System.getProperty("java.io.tmpdir");
+	
+	private Logger log = Logger.getLogger(FileManagerImpl.class);
 	
 	public List<FileInfo> uploadFile(HttpServletRequest request) throws FileManagerException {
 		
@@ -39,10 +44,11 @@ public class FileManagerImpl implements FileManager,InitializingBean {
 				    FileItemStream item = iter.next();
 					if(!item.isFormField()){
 						String name = item.getName();
-						if(name.lastIndexOf("\\")>-1)
+						if(name.lastIndexOf("\\")>-1){
 							fileName=name.substring(name.lastIndexOf("\\")+1);
-						else
+						}else{
 							fileName=name;
+						}
 						if(fileName != null){
 							InputStream uploadis=item.openStream();
 							FInfo f = store.createFile(fileName,uploadis);
@@ -60,9 +66,11 @@ public class FileManagerImpl implements FileManager,InitializingBean {
 					}
 				}				
 			} catch (FileUploadException e) {
+				log.error("FileUploadException", e);
 				FileManagerException ex = new FileManagerException(e);
 				throw ex;
 			} catch (Exception e) {
+				log.error("Exception", e);
 				e.printStackTrace();
 			}
 			
