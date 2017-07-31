@@ -30,18 +30,23 @@ var ctxPath = '<%=ctxPath%>';
     
   			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		    	<ul class="nav navbar-nav">
-		        	<li class="active"><a href="#">用户管理 </a></li>
-		        	<li><a href="#">菜单管理</a></li>
+		        	<li class="active"><a href="#">业务模块1</a></li>
+		        	<li><a href="#">业务模块2</a></li>
+		        	<li><a href="#">业务模块3</a></li>
+		        	<li><a href="#">日志管理</a></li>
 		        	<li class="dropdown">
 		          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统管理<span class="caret"></span></a>
 		          		<ul class="dropdown-menu">
-				            <li><a href="#">小师</a></li>
+				            <li><a href="#">用户管理</a></li>
 				            <li role="separator" class="divider"></li>
-				            <li><a href="#">国中</a></li>
+				            <li><a href="#">角色管理</a></li>
 				            <li role="separator" class="divider"></li>
-				            <li><a href="#">见红</a></li>
+				            <li><a href="#">菜单管理</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">数据字典</a></li>
 		          		</ul>
 		        	</li>
+		        	<li><a href="../monitoring">系统监控</a></li>
 		      	</ul>
 		      	<ul class="nav navbar-nav navbar-right">
 		      		<li class="dropdown">
